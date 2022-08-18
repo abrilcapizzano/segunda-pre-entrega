@@ -1,12 +1,10 @@
 /** Uso un constructor para crear mis productos */
 class Producto {
-    constructor(nombre, precio, id, img, cantidad, precioTotal) {
+    constructor(nombre, precio, id, img) {
         this.nombre = nombre;
         this.precio = precio;
         this.id = id;
         this.img = img
-        this.cantidad = cantidad;
-        this.precioTotal = precioTotal ;
     }
 }
 let valorTotal;
