@@ -1,16 +1,18 @@
 /** Uso un constructor para crear mis productos */
 class Producto {
-    constructor(nombre, precio, id, img) {
+    constructor(nombre, precio, id, img, cantidad, precioTotal) {
         this.nombre = nombre;
         this.precio = precio;
         this.id = id;
         this.img = img
+        this.cantidad = cantidad;
+        this.precioTotal = precioTotal ;
     }
 }
-
 let valorTotal;
 const productos = [];
 const carrito = []
+
 
 /**Pusheo mis objetos al array productos */
 productos.push(new Producto("Remera Azul", 3000, 1, "https://www.digitalsport.com.ar/files/products/5f28411d5cabf-520358-500x500.jpg"))
@@ -47,6 +49,7 @@ for (const producto of productos) {
     article.querySelector("button").addEventListener('click', () => {
         modalContainer.classList.add('modal-container-active')
         carrito.push(producto)
+        console.log(carrito)
     })
 }
 
@@ -68,7 +71,7 @@ btnCarrito.addEventListener('click', () => {
                              <ul id ="lista-carrito"></ul>`
     /**Para cada elemento de mi array carrito creo un elemento li en el DOM */
     for (const item of carrito) {
-        carritoDiv.querySelector("ul").innerHTML += `<li class = "elemento-carrito">${item.nombre} $${item.precio}</li>`
+        carritoDiv.querySelector("ul").innerHTML += `<li class = "elemento-carrito">${item.nombre}<img class="imagen-producto-carrito" src = ${item.img} alt = " "> $${item.precio}</li>`
     }
     carritoDiv.append(divBotones)
     divBotones.append(btnPagar, btnSeguir)
@@ -81,7 +84,6 @@ const btnPagar = document.querySelector('#btnPay')
 btnPagar.addEventListener('click', () => {
     location.href = 'pay.html';
 })
-
 
 /**Boton que desactiva el modulo carrito */
 const btnSeguir = document.querySelector('#btnSeguir')
