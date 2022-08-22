@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <link rel="stylesheet" href="../style.css">
 </head>
 <header>
@@ -17,30 +18,26 @@
     <button><a href="../index.html">Inicio</a></button>
     <button><a href="nosotros.html">Nosotros</a></button>
     <section id="cart-seccion">
-        <button id="openCarrito"><img class="cart-img" src="https://cdn-icons-png.flaticon.com/512/34/34627.png"alt=""></button>
+        <button id="openCarrito"><img class="cart-img" src="https://cdn-icons-png.flaticon.com/512/34/34627.png"alt="">  <span id="contadorCarrito">0</span></button>
         <div id="carrito-container" class="carrito-container">
             <div id="carrito" class="my-carrito">
                 <div id="divBotones">
                     <button id="btnSeguir">Seguir comprando</button>
-                    <button id="btnPay"> <a href="pay.html">Pagar</a></button>
+                    <button id="btnPay">Pagar</button>
+                    <button id="btnVaciar">Vaciar</button>
+                </div>
                 </div>
             </div>
         </div>
     </section>
-    <div id="buscador">  <input type="Buscar Productos"> <button id="buscar">Buscar</button></div>
+    <div id="buscador">  <input id="buscar-producto" type="Buscar Productos"> <button id="buscar">Buscar</button></div>
 </header>
-
 <section id="seccion-productos">
-    <div id="modal-container" class="modal-container">
-        <div id="modal" class="my-modal">
-            <img class="cart" src="../img/shopping_cart_FILL0_wght400_GRAD0_opsz48.png" alt="">
-            <h2>Producto agregado al carrito!</h2>
-            <button id="modal-close" class="btn">Continuar comprando</button>
-        </div>
-    </div>
 </section>
-<script src="../js/darkmode.js"></script>
-<script src="../js/carrito.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+<script defer src="../js/sweet.js"></script>
+<script defer src="../js/darkmode.js"></script>
+<script defer src="../js/carrito.js"></script>
 </body>
 
 </html>

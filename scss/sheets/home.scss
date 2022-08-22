@@ -77,37 +77,6 @@ button {
 }
 
 
-.modal-container {
-    background-color: rgba(0, 0, 0, 0.3);
-    width: 100%;
-    height: auto;
-    position: fixed;
-    inset: 0;
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-start;
-    opacity: 0;
-    visibility: hidden;
-    transition: all .3s ease-in-out;
-}
-
-.my-modal {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 250px;
-    height: 220px;
-    background-color: rgb(136, 230, 136);
-    padding: 10px;
-    border-radius: 20px;
-    color: white;
-}
-
-.modal-container-active {
-    opacity: 1;
-    visibility: visible;
-}
 
 h2 {
     font-size: 18px;
@@ -181,7 +150,7 @@ h4{font-size: 18px;}
     justify-content: space-evenly;
 }
 #btnSeguir{
-    background-color: lightgreen;
+    background-color: #41EB2D;
 }
 .itemLocal{
     background-color: white;
@@ -189,3 +158,11 @@ h4{font-size: 18px;}
 .dark-mode{
    img{  width: 60px;}
 }
+
+.swal2-styled.swal2-confirm {
+    border: 0;
+    border-radius: 0.25em;
+    background: initial;
+    background-color: #41EB2D;
+    color: #fff;
+    font-size: 1em;}
