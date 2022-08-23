@@ -13,7 +13,7 @@ class Producto {
 let valorTotal;
 const productos = [];
 
-/**USO DE OPERADORES AVANZADO */
+/**USO DE OPERADORES AVANZADO PARA CHEQUEAR SI EXISTE UN CARRITO EN LOCALSTORAGE*/
 const carrito = JSON.parse(localStorage.getItem('carrito')) || []
 
 
