@@ -42,6 +42,7 @@ const btnVaciar = document.querySelector('#btnVaciar')
 const btnCarrito = document.querySelector('#openCarrito')
 const contadorCarrito = document.querySelector('#contadorCarrito')
 
+/**FUncion que actualiza la cantidad de productos del carrito para que el span cambie */
 const actualizarCantidad = () => {
     contadorCarrito.innerText = carrito.length
 }
@@ -58,6 +59,7 @@ for (const producto of productos) {
     listaProductos.append(article)
     /**Le doy funcionalidad al boton agregar producto */
     article.querySelector("button").addEventListener('click', () => {
+        /**Uso de libreria */
         Toastify({
             text: "Producto agregado al carrito",
             duration: 3000,
@@ -73,6 +75,7 @@ for (const producto of productos) {
     })
 }
 
+/**Funcion para eliminar UN producto del carrito */
 const eliminarDelCarrito = (id) => {
     const producto = carrito.find((prod) => prod.id === id)
     const indice = carrito.indexOf(producto)
@@ -90,6 +93,8 @@ const eliminarDelCarrito = (id) => {
         
         }).showToast();
 }
+
+/**Funcion que agrega el producto al carrito */
 const agregarProducto = () => { 
 valorTotal = carrito.reduce((valorAcc, item) => { return valorAcc + item.precio; }, 0);
     carritoDiv.innerHTML = ` <h4> El valor total es $${valorTotal} </h4>
@@ -103,6 +108,7 @@ valorTotal = carrito.reduce((valorAcc, item) => { return valorAcc + item.precio;
     divBotones.append(btnPagar, btnSeguir) 
     actualizarCantidad() }
 
+    /**Funcion para vaciar el carrito completamente */
     vaciarCarrito = () => { 
          carrito.length = 0
         carritoDiv.innerHTML = `<p> No hay nada en el carrito </p>` 
@@ -110,6 +116,7 @@ valorTotal = carrito.reduce((valorAcc, item) => { return valorAcc + item.precio;
         divBotones.append(btnPagar, btnSeguir)  }
 
 btnVaciar.addEventListener('click', () =>{  
+    /**Uso de libreria */
     Swal.fire({
         title: 'Seguro queres vaciar?',
         icon: 'warning',
@@ -149,7 +156,7 @@ btnSeguir.addEventListener('click', () => {
 })
 divBotones.append(btnPagar, btnSeguir)
 btnPagar.addEventListener('click', () =>{
-    
+    /**Uso de libreria */
     Swal.fire({
         title: 'Seguro quieres terminar la compra?',
         imageUrl: 'https://cdni.iconscout.com/illustration/premium/thumb/skateboard-delivery-4490983-3726874.png',
