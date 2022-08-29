@@ -14,21 +14,29 @@ fetch("../productos.json")
     listaProductos.append(article)
     /**Le doy funcionalidad al boton agregar producto */
     article.querySelector("button").addEventListener('click', () => {
-        /**Uso de libreria */
-        Toastify({
-            text: "Producto agregado al carrito",
-            duration: 3000,
-            style: {
-                background: "linear-gradient(to right, #00b09b, #96c93d)",
-                color: "white"
-              }
-            
-            }).showToast();
+
     const productoEnCarrito = carrito.find((prod) => prod.id === producto.id)
 
     if (productoEnCarrito) {
-       alert('el producto ya existe')
+      Toastify({
+        text: "El producto ya está en el carrito",
+        duration: 3000,
+        style: {
+            background: "linear-gradient(to right,#DF0000 , #FF0000 )",
+            color: "white"
+          }
+        
+        }).showToast();
     } else {
+      Toastify({
+        text: "Producto agregado al carrito",
+        duration: 3000,
+        style: {
+            background: "linear-gradient(to right, #00b09b, #96c93d)",
+            color: "white"
+          }
+        
+        }).showToast();
         carrito.push(producto)
         localStorage.setItem('carrito', JSON.stringify(carrito))
         actualizarCantidad()
@@ -102,8 +110,16 @@ function subirCantidad(id){
   let carritoLs = JSON.parse(  localStorage.getItem('carrito'))
   const productoCantidad = carritoLs.find((prod) => prod.id === id)
   productoCantidad.cantidad++
+  Toastify({
+    text: "Producto agregado al carrito",
+    duration: 3000,
+    style: {
+        background: "linear-gradient(to right, #00b09b, #96c93d)",
+        color: "white"
+      }
+    
+    }).showToast();
  localStorage.setItem('carrito', JSON.stringify(carritoLs))
- console.log(carritoLs)
  const spanCantidad = document.getElementById(`cant${id}`)
  spanCantidad.innerHTML = productoCantidad.cantidad
  contadorCarrito.innerText = carritoLs.reduce((valorAcc, item) => { return valorAcc + item.cantidad; }, 0);
