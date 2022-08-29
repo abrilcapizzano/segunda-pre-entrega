@@ -74,3 +74,11 @@ flex-direction: row;
     flex-direction: row;
     justify-content: space-evenly;
 }
+#openCarrito{
+    background-color: transparent;
+    border-radius: 20px;
+    span{
+        background-color: greenyellow;
+        color: white;
+    font-size: 24px;}
+}

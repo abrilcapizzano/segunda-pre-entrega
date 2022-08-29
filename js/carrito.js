@@ -1,54 +1,9 @@
 /** Uso un constructor para crear mis productos */
-let cantidadTotal;
-class Producto {
-    constructor(nombre, precio, id, img, talle, cantidad) {
-        this.nombre = nombre;
-        this.precio = precio;
-        this.id = id;
-        this.img = img
-        this.talle = talle
-        this.cantidad = cantidad
-    }
-}
-let valorTotal;
-const productos = [];
-
-/**USO DE OPERADORES AVANZADO PARA CHEQUEAR SI EXISTE UN CARRITO EN LOCALSTORAGE*/
-const carrito = JSON.parse(localStorage.getItem('carrito')) || []
-
-
-
-
-/**Pusheo mis objetos al array productos */
-productos.push(new Producto("Remera Azul", 3000, 1, "https://www.digitalsport.com.ar/files/products/5f28411d5cabf-520358-500x500.jpg", "M"))
-productos.push(new Producto("Remera Roja", 3000, 2, "https://imagesa1.lacoste.com/dw/image/v2/BCWL_PRD/on/demandware.static/-/Sites-master/default/dw7c296c1f/TH6709_240_20.jpg?imwidth=915&impolicy=product", "M"))
-productos.push(new Producto("Remera Rosa", 3000, 3, "https://drifters.com.ar/uploads/product_image/25354/650w_DriftersPDP_APP_VN000GGG00-YUH_Shot1.jpg", "M"))
-productos.push(new Producto("Remera Verde", 3000, 4, "https://http2.mlstatic.com/D_NQ_NP_791217-MLA47630098451_092021-O.jpg"))
-productos.push(new Producto("Pantalon", 9000, 5, 'https://street47.vtexassets.com/arquivos/ids/175327-800-auto?v=637826230793800000&width=800&height=auto&aspect=true', "M"))
-productos.push(new Producto("Camisa", 7000, 6, 'https://equus.vtexassets.com/arquivos/ids/193047-800-auto?v=637197098806570000&width=800&height=auto&aspect=true', "M"))
-productos.push(new Producto("Campera", 1000, 7, 'https://equus.vtexassets.com/arquivos/ids/205655-800-auto?v=637516945504130000&width=800&height=auto&aspect=true', "M"))
-productos.push(new Producto("Zapatillas", 12000, 8, "https://www.digitalsport.com.ar/files/products/5c5d8bde6cecf-181658-500x500.jpg", "M"))
-productos.push(new Producto("Medias", 700, 9, "https://d3ugyf2ht6aenh.cloudfront.net/stores/063/239/products/medias-van-gogh1-f76040b8754a23fc9b15647246873183-1024-1024.jpg", "M"))
-productos.push(new Producto("Sombrero", 1500, 10, 'https://imagesa1.lacoste.com/dw/image/v2/BCWL_PRD/on/demandware.static/-/Sites-master/default/dw47a652d3/RK2056_HDE_20.jpg?imwidth=915&impolicy=product', "M"))
-
-/**Traigo todos los elementos del HTML */
-const listaProductos = document.querySelector('#seccion-productos')
-const sectionCarrito = document.querySelector('#cart-seccion')
-const carritoContainer = document.querySelector('#carrito-container')
-const carritoDiv = document.querySelector('#carrito')
-const btnSeguir = document.querySelector('#btnSeguir')
-const btnPagar = document.querySelector('#btnPay')
-const btnVaciar = document.querySelector('#btnVaciar')
-const btnCarrito = document.querySelector('#openCarrito')
-const contadorCarrito = document.querySelector('#contadorCarrito')
-
-/**FUncion que actualiza la cantidad de productos del carrito para que el span cambie */
-const actualizarCantidad = () => {
-    contadorCarrito.innerText = carrito.length
-}
-
-/**Creo mis productos en el DOM */
-for (const producto of productos) {
+fetch("../productos.json")
+  .then((resp) => resp.json())
+  .then(function (data) {
+  const productos = data
+  for (const producto of productos) {
     const article = document.createElement('article')
     article.className = 'item'
     article.innerHTML = `<h3> ${producto.nombre}</h3>      
@@ -69,11 +24,53 @@ for (const producto of productos) {
               }
             
             }).showToast();
+    const productoEnCarrito = carrito.find((prod) => prod.id === producto.id)
+
+    if (productoEnCarrito) {
+       alert('el producto ya existe')
+    } else {
         carrito.push(producto)
         localStorage.setItem('carrito', JSON.stringify(carrito))
         actualizarCantidad()
+    }
     })
 }
+  })
+
+  .catch(function (error) {
+    console.log(error);
+  });
+
+
+let cantidadTotal;
+let valorTotal;
+
+
+/**USO DE OPERADORES AVANZADO PARA CHEQUEAR SI EXISTE UN CARRITO EN LOCALSTORAGE*/
+const carrito = JSON.parse(localStorage.getItem('carrito')) || []
+
+
+
+
+
+/**Traigo todos los elementos del HTML */
+const listaProductos = document.querySelector('#seccion-productos')
+const sectionCarrito = document.querySelector('#cart-seccion')
+const carritoContainer = document.querySelector('#carrito-container')
+const carritoDiv = document.querySelector('#carrito')
+const btnSeguir = document.querySelector('#btnSeguir')
+const btnPagar = document.querySelector('#btnPay')
+const btnVaciar = document.querySelector('#btnVaciar')
+const btnCarrito = document.querySelector('#openCarrito')
+const contadorCarrito = document.querySelector('#contadorCarrito')
+
+/**Funcion que actualiza la cantidad de productos del carrito para que el span cambie */
+const actualizarCantidad = () => {
+    contadorCarrito.innerText = carrito.reduce((valorAcc, item) => { return valorAcc + item.cantidad; }, 0);
+}
+
+/**Creo mis productos en el DOM */
+
 
 /**Funcion para eliminar UN producto del carrito */
 const eliminarDelCarrito = (id) => {
@@ -94,19 +91,36 @@ const eliminarDelCarrito = (id) => {
         }).showToast();
 }
 
+function actualizarValor (carrito) {
+  valorTotal = carrito.reduce((valorAcc, item) => { return valorAcc + item.precio*item.cantidad; }, 0);
+  return valorTotal
+}
+
+
+
+function subirCantidad(id){
+  let carritoLs = JSON.parse(  localStorage.getItem('carrito'))
+  const productoCantidad = carritoLs.find((prod) => prod.id === id)
+  productoCantidad.cantidad++
+ localStorage.setItem('carrito', JSON.stringify(carritoLs))
+ console.log(carritoLs)
+ const spanCantidad = document.getElementById(`cant${id}`)
+ spanCantidad.innerHTML = productoCantidad.cantidad
+ contadorCarrito.innerText = carritoLs.reduce((valorAcc, item) => { return valorAcc + item.cantidad; }, 0);
+ document.querySelector("#valor").innerText = `El valor total es $${actualizarValor(carritoLs)}`
+  }
 /**Funcion que agrega el producto al carrito */
 const agregarProducto = () => { 
-valorTotal = carrito.reduce((valorAcc, item) => { return valorAcc + item.precio; }, 0);
-    carritoDiv.innerHTML = ` <h4> El valor total es $${valorTotal} </h4>
-                             <p> Los productos que seleccionaste son: ${carrito.length}</p>
+    carritoDiv.innerHTML = ` <h4 id = "valor"> El valor total es $${actualizarValor(carrito)} </h4>
                              <ul id ="lista-carrito"></ul>`
     /**Para cada elemento de mi array carrito creo un elemento li en el DOM */
     for (const item of carrito) {
-        carritoDiv.querySelector("ul").innerHTML += `<li class = "elemento-carrito">${item.nombre}<img class="imagen-producto-carrito" src = ${item.img} alt = " "> $${item.precio}  <button onclick="eliminarDelCarrito(${item.id})" class ="eliminar" id="${item.id}">Eliminar</button></li>`
+        carritoDiv.querySelector("ul").innerHTML += `<li class = "elemento-carrito">${item.nombre}<img class="imagen-producto-carrito" src = ${item.img} alt = " "> $${item.precio} ${item.talle} <button onclick="subirCantidad(${item.id})">+</button> <span id ="cant${item.id}">${item.cantidad} </span><button onclick="eliminarDelCarrito(${item.id})" class ="eliminar" id="${item.id}">Eliminar</button></li>`
     } 
     carritoDiv.append(divBotones)
-    divBotones.append(btnPagar, btnSeguir) 
-    actualizarCantidad() }
+    divBotones.append(btnPagar, btnSeguir)
+    actualizarCantidad()
+  }
 
     /**Funcion para vaciar el carrito completamente */
     vaciarCarrito = () => { 

@@ -168,6 +168,15 @@ h4 {
   color: #fff;
   font-size: 1em; }
 
+.contenedor-carrito {
+  display: flex;
+  flex-direction: row; }
+
+.contenedor-contador {
+  width: 40px;
+  font-size: 23px;
+  background-color: #41EB2D; }
+
 #pay-home {
   display: flex;
   flex-direction: column;
@@ -178,15 +187,17 @@ h4 {
 footer {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: space-between;
+  align-items: center;
   background-color: #4B4b4b;
-  height: auto;
+  height: 400px;
   color: white;
   margin-top: 120px; }
   footer .social-media {
     width: 60px; }
   footer .logo {
-    width: 240px; }
+    width: 100px;
+    height: 80px; }
 
 p {
   font-size: 20px; }
@@ -197,10 +208,8 @@ h6 {
 
 .newsletter {
   width: 20rem;
-  height: 19rem;
   display: flex;
-  flex-direction: column;
-  justify-self: flex-end; }
+  flex-direction: column; }
   .newsletter .container.news {
     padding: 20px;
     background-color: transparent; }
@@ -292,3 +301,11 @@ h6 {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly; }
+
+#openCarrito {
+  background-color: transparent;
+  border-radius: 20px; }
+  #openCarrito span {
+    background-color: greenyellow;
+    color: white;
+    font-size: 24px; }
