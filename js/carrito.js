@@ -1,4 +1,4 @@
-/** Uso un constructor para crear mis productos */
+/**Uso de fetch */
 fetch("../productos.json")
   .then((resp) => resp.json())
   .then(function (data) {
