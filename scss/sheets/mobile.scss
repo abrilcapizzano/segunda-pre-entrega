@@ -1,0 +1,25 @@
+@media screen and (min-width:200px) and (max-width:768px) {
+    footer {
+        display: grid;
+        width: 100%;
+        grid-template-columns: 100%;
+        grid-template-rows: repeat(3, 33%);
+        height: 80vh;
+    align-items: center;
+    justify-content: center;
+    margin: 0px;
+        form{
+            justify-self: center;
+        }
+
+        .redes {
+            justify-self: center;
+        }
+        .logo{
+            justify-self: center;
+        }
+        div {
+            justify-self: center;
+        }
+    }
+}

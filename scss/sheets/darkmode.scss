@@ -1,5 +1,5 @@
 .dark {
-    background-color: rgb(48, 45, 45);
+    background-color: black;
     h1{
          color: white;
     }
@@ -16,6 +16,45 @@
         font-size: 32px;
         }
     }
+    article{
+        background-color:  rgb(25, 25, 25);
+    p{
+        color: white;
+
+    }
+    h3{color: white;}
+    }
+    #carrito{
+        background-color: rgb(25, 25, 25);
+           p{
+        color: white;
+
+    }
+    h4{color: white;
+    }
+    li{color: white;
+        border: 1px solid white;
+    }
+    span{
+        color: white;
+    }
+    button{
+        background-color: white;
+    }
+    .eliminar{
+        background-color: red;
+    }
+    }
+    #seccion-productos{ 
+        .noExiste{
+        background-color: transparent;
+        color: white}
+        a{
+            background-color: transparent;
+            color: white;
+        }
+    }
+
 }
 .dark * {
     color: black;
