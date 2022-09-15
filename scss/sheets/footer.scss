@@ -3,12 +3,12 @@ footer {
  flex-direction: row;
  justify-content: space-around;
  align-items: center;
- background-color:#7AFE12;
-    height: 400px;
+ background-color:#050827;
+    height: 350px;
     color: white;
     margin-top: 120px;
     .social-media{
-        width: 60px;
+        width: 40px;
     }
     .logo{
         width: 120px;
@@ -17,12 +17,17 @@ footer {
 }
 
 p {
+    color: white;
     font-size: 20px;
 }
 
 h6 {
-    color: black;
+    color: white;
     font-size: 24px;
+}
+div{
+    display: flex;
+    flex-direction: column;
 }
 
 .newsletter {
@@ -53,11 +58,12 @@ h6 {
     }
 
     h6 {
+        color: white;
         font-size: 32px;
     }
 
     p {
-        color: black;
+        color: white;
         font-size: 20px;
     }
 }

@@ -25,20 +25,7 @@ p{color: black;}
     justify-content: center;    
     align-items: center;
 
-
-
-    .noExiste{
-        display: flex;
-        flex-direction: column;
-        margin: 10px;
-        justify-content: center;
-        align-items: center;
-        align-content: center;
-        text-align: center;
-        color: black;
-        background-color: #41EB2D;
-        grid-template-areas: 2;
-    }
+p{color: black;}
 
 }
 
@@ -61,20 +48,24 @@ header{
     justify-content: space-evenly;
     align-items: center;
     width: 100%;
-    height:fit-content;
-    background-color:#7AFE12;
+    height:64px;
+    background-color:#050827;
     a{text-decoration: none;
-        font-size: 18px;
+        font-size: 16px;
         color: black;
     }
     button{
-        width: 90px;
-        background-color: rgba(255, 255, 255, 0.286);
+        color: black;
+        width: 80px;
+        background-color: rgb(255, 255, 255);
         border-radius:10px ;
+    }
+    #openCarrito{
+        background-color: white;
     }
 }
 .logo{
-    width: 160px;
+    width: 64px;
 }
 
 
@@ -191,3 +182,9 @@ h4{font-size: 18px;}
         display: flex;
         flex-direction: row;
     }
+
+
+    .swiper {
+        width: 1200px;
+        height: 400px;
+      }

@@ -20,6 +20,11 @@
     visibility: hidden;
     transition: all .3s ease-in-out;
 }
+.my-carrito{
+    p{
+        color: black;
+    }
+}
 
 #carrito {
     display: flex;
@@ -33,6 +38,7 @@
     padding: 40px;
     border-radius: 20px;
     color: black;
+    p{color: black;}
 }
 
 .carrito-container-active {
@@ -47,6 +53,7 @@
     flex-wrap: wrap;
     flex-direction: row;
     width: fit-content;
+    color: white;
 }
 .elemento-carrito {
     list-style: none;
@@ -72,7 +79,9 @@
             height: 20px;
         }
     }
-
+span{
+    color: black;
+}
 }
 #divBotones{
     margin: 2px;

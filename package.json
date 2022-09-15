@@ -1,20 +1,21 @@
 {
-  "name": "events-desafio",
+  "name": "pre-entrega-2",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
   "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
     "build-css": "node-sass --include-path scss scss/main.scss style.css",
-    "watch-css": "nodemon -e scss -x \"npm run build-css\"",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "watch-css": "nodemon -e scss -x \"npm run build-css\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abrilcapizzano/segunda-pre-entrega.git"
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "@splidejs/splide": "^4.0.15",
-    "node-sass": "^7.0.1",
-    "nodemon": "^2.0.19",
-    "sweetalert2": "^11.4.29",
-    "swiper": "^8.3.2"
-  }
+  "bugs": {
+    "url": "https://github.com/abrilcapizzano/segunda-pre-entrega/issues"
+  },
+  "homepage": "https://github.com/abrilcapizzano/segunda-pre-entrega#readme"
 }

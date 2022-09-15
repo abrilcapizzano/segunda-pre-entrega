@@ -18,11 +18,10 @@
     }
     article{
         background-color:  rgb(25, 25, 25);
-    p{
         color: white;
-
     }
-    h3{color: white;}
+    .p-text{
+        color: white;
     }
     #carrito{
         background-color: rgb(25, 25, 25);
@@ -46,6 +45,7 @@
     }
     }
     #seccion-productos{ 
+        color: white;
         .noExiste{
         background-color: transparent;
         color: white}
@@ -53,9 +53,9 @@
             background-color: transparent;
             color: white;
         }
+        p{
+            color: white;
+        }
     }
 
-}
-.dark * {
-    color: black;
 }

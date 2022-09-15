@@ -6,19 +6,13 @@ function crearCards(array) {
                       <div> <img class="imagen" src = ${producto.img} alt = " "> </div>
                       <p class = "precio-text"> $${producto.precio} </p>
                       <p class = "talle-text"> ${producto.talle} </p>
-                      <button class = 'btnAgregar'>Agregar Producto</button>`
+                      <button id = "${producto.id}" class = 'btnAgregar'>Agregar Producto</button>`
     listaProductos.append(article)
     /**Le doy funcionalidad al boton agregar producto */
     const btnAgregar = article.querySelector("button")
     btnAgregar.addEventListener('click', () => {
-      
-      btnAgregar.setAttribute("disabled", true);
-      btnAgregar.innerHTML = "Agregado";
-      localStorage.setItem('agregado', JSON.stringify(btnAgregar))
       const productoEnCarrito = carrito.find((prod) => prod.id === producto.id)
       if (productoEnCarrito) {
-      btnAgregar.innerHTML = 'Agregado'
-      localStorage.getItem('agregado')
         Toastify({
           text: "El producto ya está en el carrito",
           duration: 3000,
@@ -35,13 +29,42 @@ function crearCards(array) {
         localStorage.setItem('carrito', JSON.stringify(carrito))
 
       }
+      localStorage.setItem('carrito', JSON.stringify(carrito))
+    cambiarBotones()
     })
   }
+  cambiarBotones()
 }
 
+    /**FUNCION PARA DESACTIVAR BOTONES */
+    function cambiarBotones () { 
+    const btnAgregar = document.querySelectorAll(".btnAgregar")
+  const btnLS = JSON.parse(  localStorage.getItem('carrito'))
+  for (const item of btnLS) {
+    for (const boton of btnAgregar) {
+      if (item.id == boton.id){
+        boton.setAttribute("disabled", true); // Desactivo el Boton.
+        boton.innerHTML = "Agregado";
+      }
+      
+    }
+  }
+    }
 
-
-
+/**FUNCIO HABILITAR BOTON */  
+function habilitarBotones () { 
+  const btnAgregar = document.querySelectorAll(".btnAgregar")
+const btnLS = JSON.parse(  localStorage.getItem('carrito'))
+for (const item of btnLS) {
+  for (const boton of btnAgregar) {
+    if (item.id == boton.id){
+      boton.setAttribute("disabled", true); // Desactivo el Boton.
+      boton.innerHTML = "Agregado";
+    }
+    
+  }
+}
+  }  
 
 
 /**Uso de fetch para traer la base de datos de los productos */
@@ -50,19 +73,25 @@ fetch("../productos.json")
   .then((resp) => resp.json())
   .then(function (data) {
     const productos = data
+   
     /**creo mis productos en el DOM */
     crearCards(productos)
-/**Barra de busqueda */
+  
+    cambiarBotones()
+
+    /**BARRA DE BUSQUEDA */
     const botonSubmit = document.querySelector("#boton-submit")
     botonSubmit.addEventListener("click", function (e) {
+      
+      /**Prevent default para que la pagine no se recargue */
       e.preventDefault();
       let busqueda = document.querySelector("#input-buscador").value.toUpperCase();
       const resultados = productos.filter((item) => item.nombre.toUpperCase().includes(busqueda));
-      if (resultados) {
+      if (resultados.length > 0) {
         listaProductos.innerHTML = " "
         crearCards(resultados)
       }else{
-        listaProductos.innerHTML = `<p>No Hay Ningun Producto</p>`
+        listaProductos.innerHTML = `<p> No se encontró, volve al <a href="../pages/productos.html"> inicio</a>  <p>`
       }
     });
   })
@@ -131,7 +160,7 @@ const actualizarCantidad = () => {
   contadorCarrito.innerText = carrito.reduce((valorAcc, item) => { return valorAcc + item.cantidad; }, 0);
 }
 
-/**Funcion para eliminar toda la cantidad del carrito producto del carrito */
+/**Funcion para eliminar toda la cantidad del producto del carrito */
 const eliminarDelCarrito = (id) => {
   toastEliminado()
   const producto = carrito.find((prod) => prod.id === id)
@@ -140,6 +169,7 @@ const eliminarDelCarrito = (id) => {
   agregarProducto()
   localStorage.setItem('carrito', JSON.stringify(carrito))
   actualizarCantidad()
+  cambiarBotones()
 
 }
 
@@ -190,7 +220,7 @@ const agregarProducto = () => {
                              <ul id ="lista-carrito"></ul>`
   /**Para cada elemento de mi array carrito creo un elemento li en el DOM */
   for (const item of carrito) {
-    carritoDiv.querySelector("ul").innerHTML += `<li class = "elemento-carrito">${item.nombre}<img class="imagen-producto-carrito" src = ${item.img} alt = " "> $${item.precio} ${item.talle} <button onclick="subirCantidad(${item.id})">+</button> <button onclick="bajarCantidad(${item.id})">-</button> <span id ="cant${item.id}">${item.cantidad} </span><button onclick="eliminarDelCarrito(${item.id})" class ="eliminar" id="${item.id}"><img src="../img/clarity_trash-line.png" alt=""></button></li>`
+    carritoDiv.querySelector("ul").innerHTML += `<li class = "elemento-carrito">${item.nombre}<img class="imagen-producto-carrito" src = ${item.img} alt = " "> $${item.precio} ${item.talle} <button onclick="subirCantidad(${item.id})">+</button> <button onclick="bajarCantidad(${item.id})">-</button> <span id ="cant${item.id}">${item.cantidad} </span><button onclick="eliminarDelCarrito(${item.id})" class ="eliminar" id="${item.id}"><img src="../img/clarity_trash-line.png" alt=""></button></li> `
   }
   carritoDiv.append(divBotones)
   divBotones.append(btnPagar, btnSeguir)
@@ -270,5 +300,10 @@ btnPagar.addEventListener('click', () => {
     }
   })
 })
+
+
+
+
+
 
 agregarProducto()
