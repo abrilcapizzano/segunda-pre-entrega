@@ -30,17 +30,17 @@ function crearCards(array) {
 
       }
       localStorage.setItem('carrito', JSON.stringify(carrito))
-    cambiarBotones()
+      deshabilitarBtns()
     })
   }
-  cambiarBotones()
+  deshabilitarBtns()
 }
 
     /**FUNCION PARA DESACTIVAR BOTONES */
-    function cambiarBotones () { 
+    function deshabilitarBtns () { 
     const btnAgregar = document.querySelectorAll(".btnAgregar")
-  const btnLS = JSON.parse(  localStorage.getItem('carrito'))
-  for (const item of btnLS) {
+  const carritoLS = JSON.parse(  localStorage.getItem('carrito'))
+  for (const item of carritoLS) {
     for (const boton of btnAgregar) {
       if (item.id == boton.id){
         boton.setAttribute("disabled", true); // Desactivo el Boton.
@@ -51,20 +51,10 @@ function crearCards(array) {
   }
     }
 
-/**FUNCIO HABILITAR BOTON */  
-function habilitarBotones () { 
-  const btnAgregar = document.querySelectorAll(".btnAgregar")
-const btnLS = JSON.parse(  localStorage.getItem('carrito'))
-for (const item of btnLS) {
-  for (const boton of btnAgregar) {
-    if (item.id == boton.id){
-      boton.setAttribute("disabled", true); // Desactivo el Boton.
-      boton.innerHTML = "Agregado";
-    }
-    
-  }
-}
-  }  
+
+
+
+
 
 
 /**Uso de fetch para traer la base de datos de los productos */
@@ -77,7 +67,7 @@ fetch("../productos.json")
     /**creo mis productos en el DOM */
     crearCards(productos)
   
-    cambiarBotones()
+    deshabilitarBtns()
 
     /**BARRA DE BUSQUEDA */
     const botonSubmit = document.querySelector("#boton-submit")
@@ -169,9 +159,12 @@ const eliminarDelCarrito = (id) => {
   agregarProducto()
   localStorage.setItem('carrito', JSON.stringify(carrito))
   actualizarCantidad()
-  cambiarBotones()
-
+  const boton = document.getElementById(`${id}`)
+  boton.removeAttribute("disabled")
+  boton.innerHTML = "Agregar Producto"
 }
+
+
 
 function actualizarValor(carrito) {
   valorTotal = carrito.reduce((valorAcc, item) => { return valorAcc + item.precio * item.cantidad; }, 0);
@@ -180,12 +173,9 @@ function actualizarValor(carrito) {
 
 
 
-
-
 function bajarCantidad(id) {
   const producto = carrito.find((prod) => prod.id === id)
   producto.cantidad -= 1
-
   if (producto.cantidad === 0) {
     const indice = carrito.indexOf(producto)
     carrito.splice(indice, 1)
